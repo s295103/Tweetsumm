@@ -171,7 +171,8 @@ class TweetSumProcessor():
         for annotation in annotations:
             if 'abstractive' in annotation.keys():
                 abstractive_summary = annotation['abstractive']
-                summaries.append(abstractive_summary)
+                if abstractive_summary:
+                    summaries.append(abstractive_summary)
         return summaries
 
     def get_dialog_with_summaries(self, tweet_sum_lines: List[str]) -> List[DialogWithSummaries]:
