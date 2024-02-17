@@ -161,7 +161,7 @@ class TweetSumProcessor():
                         tweet_id = sentence['tweet_id']
                         offset = sentence['sentence_offset']
                         turn = self.__get_turn(tweet_id, [offset])
-                        extractive_summary = ' '.join([extractive_summary, turn])
+                        extractive_summary = ' '.join([extractive_summary, str(turn)])
                     extractive_summaries.append(extractive_summary)
 
         return extractive_summaries
