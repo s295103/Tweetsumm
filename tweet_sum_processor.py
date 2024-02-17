@@ -20,7 +20,8 @@ class Turn():
             'is_agent' : self.is_agent(),
             'sentences' : self.sentences
         }
-        return json.dumps(result)
+        #return json.dumps(result)
+        return json.dumps(self.__str__())
 
     def __str__(self):
         return ('Agent:\t' if self.is_agent() else 'Customer:\t')  + ' '.join(self.sentences)
