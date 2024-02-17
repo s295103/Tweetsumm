@@ -74,7 +74,7 @@ class DialogWithSummaries():
         result = {
             'dialog' : json.loads(self.dialog.get_json()),
             'summaries' : {
-                'extractive_summaries' : self.get_extractive_summaries()
+                'extractive_summaries' : self.get_extractive_summaries(),
                 'abstractive_summaries' : self.get_abstractive_summaries()
             }
         }
