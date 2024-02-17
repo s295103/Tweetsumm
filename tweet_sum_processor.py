@@ -154,14 +154,14 @@ class TweetSumProcessor():
         extractive_summaries = list()
         for annotation in annotations:
             if 'extractive' in annotation.keys():
-                extractive_summary = list()
+                extractive_summary = ""
                 extractive_annotation = annotation['extractive']
                 if extractive_annotation :
                     for sentence in extractive_annotation :
                         tweet_id = sentence['tweet_id']
                         offset = sentence['sentence_offset']
                         turn = self.__get_turn(tweet_id, [offset])
-                        extractive_summary.append(turn)
+                        extractive_summary = ' '.join([extractive_summary, turn])
                     extractive_summaries.append(extractive_summary)
 
         return extractive_summaries
@@ -170,10 +170,9 @@ class TweetSumProcessor():
     def __get_abstractive_summaries(annotations) -> List[List[str]]:
         summaries = list()
         for annotation in annotations:
-            if 'abstractive' in annotation.keys():
-                abstractive_summary = annotation['abstractive']
-                if abstractive_summary:
-                    summaries.append(abstractive_summary)
+            if 'abstractive' in annotation.keys() and annotation['abstractive']:
+                abstractive_summary = ' '.join(annotation['abstractive'])
+                summaries.append(abstractive_summary)
         return summaries
 
     def get_dialog_with_summaries(self, tweet_sum_lines: List[str]) -> List[DialogWithSummaries]:
