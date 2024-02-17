@@ -71,22 +71,11 @@ class DialogWithSummaries():
         return self.abstractive_summaries
 
     def get_json(self) -> json:
-        dialog = json.loads(self.dialog.get_json())
-        extractive_summaries_to_json = list()
-        for summ in self.extractive_summaries:
-            summ_json = [json.loads(turn.get_json()) for turn in summ]
-            extractive_summaries_to_json.append(summ_json)
-        abstractive_summaries_to_json = list()
-        for summ in self.abstractive_summaries:
-            abst_json = [txt for txt in summ ]
-            abstractive_summaries_to_json.append(abst_json)
-
         result = {
-            'dialog' : dialog,
+            'dialog' : json.loads(self.dialog.get_json()),
             'summaries' : {
-                'extractive_summaries' : extractive_summaries_to_json,
-                'abstractive_summaries' : abstractive_summaries_to_json
-
+                'extractive_summaries' : self.get_extractive_summaries()
+                'abstractive_summaries' : self.get_abstractive_summaries()
             }
         }
 
