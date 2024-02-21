@@ -20,8 +20,7 @@ class Turn():
             'is_agent' : self.is_agent(),
             'sentences' : self.sentences
         }
-        #return json.dumps(result)
-        return json.dumps(self.__str__())
+        return json.dumps(result)
 
     def __str__(self):
         return ('Agent:\t' if self.is_agent() else 'Customer:\t')  + ' '.join(self.sentences)
@@ -71,12 +70,14 @@ class DialogWithSummaries():
         return self.abstractive_summaries
 
     def get_json(self) -> json:
+        turns = [str(t) for t in self.dialog.get_turns()]
         result = {
-            'dialog' : json.loads(self.dialog.get_json()),
-            'summaries' : {
-                'extractive_summaries' : self.get_extractive_summaries(),
-                'abstractive_summaries' : self.get_abstractive_summaries()
-            }
+          "dialog_id":self.dialog.get_dialog_id(),
+          "turns": turns,
+          'summaries' : {
+                  'extractive_summaries' : self.get_extractive_summaries(),
+                  'abstractive_summaries' : self.get_abstractive_summaries()
+              }
         }
 
         return json.dumps(result)
